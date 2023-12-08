@@ -1,7 +1,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kio-zeroconf
-Version: 23.08.3
+Version: 23.08.4
 Release: 1
 Summary: KIO worker to discover file systems by DNS-SD (zeroconf)
 %if 0%{?git:1}
