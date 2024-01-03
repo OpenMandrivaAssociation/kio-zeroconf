@@ -2,7 +2,7 @@
 
 Name: kio-zeroconf
 Version: 23.08.4
-Release: 1
+Release: 2
 Summary: KIO worker to discover file systems by DNS-SD (zeroconf)
 %if 0%{?git:1}
 Source0:        https://invent.kde.org/network/%{name}/-/archive/master/%{name}-master.tar.bz2
