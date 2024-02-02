@@ -1,8 +1,8 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: plasma6-kio-zeroconf
-Version: 24.01.90
-Release: 3
+Version: 24.01.95
+Release: 1
 Summary: KIO worker to discover file systems by DNS-SD (zeroconf)
 %if 0%{?git:1}
 Source0:        https://invent.kde.org/network/%{name}/-/archive/master/%{name}-master.tar.bz2
