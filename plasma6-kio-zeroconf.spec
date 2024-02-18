@@ -1,13 +1,24 @@
+%define git 20240218
+%define gitbranch release/24.02
+%define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: plasma6-kio-zeroconf
-Version: 24.01.95
-Release: 1
+Version: 24.01.96
+Release: %{?git:0.%{git}.}1
 Summary: KIO worker to discover file systems by DNS-SD (zeroconf)
 %if 0%{?git:1}
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/network/kio-zeroconf/-/archive/%{gitbranch}/kio-zeroconf-%{gitbranchd}.tar.bz2#/kio-zeroconf-%{git}.tar.bz2
+%else
 Source0:        https://invent.kde.org/network/%{name}/-/archive/master/%{name}-master.tar.bz2
+%endif
+%else
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/network/kio-zeroconf/-/archive/%{gitbranch}/kio-zeroconf-%{gitbranchd}.tar.bz2#/kio-zeroconf-%{git}.tar.bz2
 %else
 Source0:        https://download.kde.org/%{stable}/release-service/%{version}/src/kio-zeroconf-%{version}.tar.xz
+%endif
 %endif
 License: GPL
 Group: System/Libraries
@@ -25,7 +36,7 @@ BuildRequires: cmake(KF6KIO)
 KIO worker to discover file systems by DNS-SD (zeroconf)
 
 %prep
-%autosetup -p1 -n kio-zeroconf-%{?git:master}%{!?git:%{version}}
+%autosetup -p1 -n kio-zeroconf-%{?git:%{gitbranchd}}%{!?git:%{version}}
 %cmake \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
 	-DQT_MAJOR_VERSION=6 \
