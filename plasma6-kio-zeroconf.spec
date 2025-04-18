@@ -4,8 +4,8 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: plasma6-kio-zeroconf
-Version: 24.12.3
-Release: %{?git:0.%{git}.}3
+Version: 25.04.0
+Release: %{?git:0.%{git}.}1
 Summary: KIO worker to discover file systems by DNS-SD (zeroconf)
 %if 0%{?git:1}
 %if 0%{?git:1}
