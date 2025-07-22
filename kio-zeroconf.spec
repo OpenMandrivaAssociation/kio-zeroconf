@@ -4,7 +4,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kio-zeroconf
-Version: 25.04.0
+Version: 25.04.3
 Release: %{?git:0.%{git}.}1
 Summary: KIO worker to discover file systems by DNS-SD (zeroconf)
 %if 0%{?git:1}
@@ -22,7 +22,6 @@ Source0:        https://download.kde.org/%{stable}/release-service/%{version}/sr
 %endif
 License: GPL
 Group: System/Libraries
-BuildRequires: cmake ninja
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt6Core)
 BuildRequires: cmake(Qt6DBus)
@@ -32,24 +31,16 @@ BuildRequires: cmake(KF6DNSSD)
 BuildRequires: cmake(KF6I18n)
 BuildRequires: cmake(KF6KIO)
 
+%rename plasma6-kio-zeroconf
+
+BuildSystem:	cmake
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+BuildOption:	-DQT_MAJOR_VERSION=6
+
 %description
 KIO worker to discover file systems by DNS-SD (zeroconf)
 
-%prep
-%autosetup -p1 -n kio-zeroconf-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-DQT_MAJOR_VERSION=6 \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-%find_lang kio5_zeroconf
-
-%files -f kio5_zeroconf.lang
+%files -f %{name}.lang
 %{_libdir}/qt6/plugins/kf6/kded/dnssdwatcher.so
 %{_libdir}/qt6/plugins/kf6/kio/zeroconf.so
 %{_datadir}/dbus-1/interfaces/org.kde.kdnssd.xml
