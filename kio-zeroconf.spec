@@ -5,7 +5,7 @@
 
 Name: kio-zeroconf
 Version: 25.08.3
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 Summary: KIO worker to discover file systems by DNS-SD (zeroconf)
 %if 0%{?git:1}
 %if 0%{?git:1}
